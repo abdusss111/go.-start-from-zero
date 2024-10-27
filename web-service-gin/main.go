@@ -37,18 +37,17 @@ var courses = []course{
 func getUsers(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, users)
 }
+func getUserDetail(c *gin.Context) {
+	id := c.Param("id")
 
-// func getUserDetail(c *gin.Context) {
-// 	id := c.Param("id")
-
-//		for _, a := range users {
-//			if a.ID == id {
-//				c.IndentedJSON(http.StatusOK, a)
-//				return
-//			}
-//		}
-//		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
-//	}
+	for _, a := range users {
+		if a.ID == id {
+			c.IndentedJSON(http.StatusOK, a)
+			return
+		}
+	}
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
+}
 func postUsers(c *gin.Context) {
 	var newUser user
 	if err := c.BindJSON(&newUser); err != nil {
@@ -61,26 +60,27 @@ func postUsers(c *gin.Context) {
 func getCourses(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, courses)
 }
-func getCourseDetail(c *gin.Context) {
-	title := c.Param("title")
 
-	for _, course := range courses {
-		if course.Title == title {
-			c.IndentedJSON(http.StatusOK, course)
-			return
-		}
-	}
-	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
-}
-func postCourses(c *gin.Context) {
-	var newCourse course
-	if err := c.BindJSON(&newCourse); err != nil {
-		return
-	}
+// func getCourseDetail(c *gin.Context) {
+// 	title := c.Param("title")
 
-	courses = append(courses, newCourse)
-	c.IndentedJSON(http.StatusCreated, newCourse)
-}
+// 	for _, course := range courses {
+// 		if course.Title == title {
+// 			c.IndentedJSON(http.StatusOK, course)
+// 			return
+// 		}
+// 	}
+// 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
+// }
+// func postCourses(c *gin.Context) {
+// 	var newCourse course
+// 	if err := c.BindJSON(&newCourse); err != nil {
+// 		return
+// 	}
+
+// 	courses = append(courses, newCourse)
+// 	c.IndentedJSON(http.StatusCreated, newCourse)
+// }
 
 func main() {
 	router := gin.Default()
