@@ -73,15 +73,15 @@ func getCourseDetail(c *gin.Context) {
 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
 }
 
-// func postCourses(c *gin.Context) {
-// 	var newCourse course
-// 	if err := c.BindJSON(&newCourse); err != nil {
-// 		return
-// 	}
+func postCourses(c *gin.Context) {
+	var newCourse course
+	if err := c.BindJSON(&newCourse); err != nil {
+		return
+	}
 
-// 	courses = append(courses, newCourse)
-// 	c.IndentedJSON(http.StatusCreated, newCourse)
-// }
+	courses = append(courses, newCourse)
+	c.IndentedJSON(http.StatusCreated, newCourse)
+}
 
 func main() {
 	router := gin.Default()
