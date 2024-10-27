@@ -61,17 +61,18 @@ func getCourses(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, courses)
 }
 
-// func getCourseDetail(c *gin.Context) {
-// 	title := c.Param("title")
+func getCourseDetail(c *gin.Context) {
+	title := c.Param("title")
 
-// 	for _, course := range courses {
-// 		if course.Title == title {
-// 			c.IndentedJSON(http.StatusOK, course)
-// 			return
-// 		}
-// 	}
-// 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
-// }
+	for _, course := range courses {
+		if course.Title == title {
+			c.IndentedJSON(http.StatusOK, course)
+			return
+		}
+	}
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
+}
+
 // func postCourses(c *gin.Context) {
 // 	var newCourse course
 // 	if err := c.BindJSON(&newCourse); err != nil {
